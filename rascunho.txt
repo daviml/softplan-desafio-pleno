@@ -1,0 +1,63 @@
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+DOCKER MYSQL
+
+docker run -v C:\Users\davim\Desktop\softplan-desafio-pleno\mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root --name mysql -p 3306:3306 mysql
+
+CREATE SCHEMA `softplan-desafio` ;
+
+CREATE TABLE `softplan-desafio`.`Salas` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `Nome` VARCHAR(45) NULL,
+  `Descricao` VARCHAR(45) NULL,
+  `InicioReserva` DATE NULL,
+  `FimReserva` DATE NULL,
+  `Disponivel` TINYINT NULL,
+  PRIMARY KEY (`Id`));
+
+INSERT INTO `softplan-desafio`.salas (Nome, Descricao, Disponivel)
+VALUES ("Aliança", "Sala de cima", 1);
+
+INSERT INTO `softplan-desafio`.salas (Nome, Descricao, Disponivel)
+VALUES ("Horda", "Sala de baixo", 1);
+
+INSERT INTO `softplan-desafio`.salas (Nome, Descricao, Disponivel)
+VALUES ("Protoss", "Sala da esquerda", 1);
+
+INSERT INTO `softplan-desafio`.salas (Nome, Descricao, Disponivel)
+VALUES ("Terranos", "Sala da direita", 1);
+
+INSERT INTO `softplan-desafio`.salas (Nome, Descricao, Disponivel)
+VALUES ("Zerg", "Jogados", 1);
+
+SELECT * FROM `softplan-desafio`.salas;
+
+
+
+CREATE TABLE `softplan-desafio`.`Reservas` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `DataInicio` DATETIME NULL,
+  `DataFim` DATETIME NULL,
+  `Email` VARCHAR(45) NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE INDEX `Id_UNIQUE` (`Id` ASC) VISIBLE);
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+DOCKER REACT
+
+docker build -t softplan-react-docker:dev
+
+docker run -it -p 3000:3000 softplan-react-docker:dev  
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+(reserva.DataInicio > reservaE.DataInicio && reserva.DataInicio < reservaE.DataFim)
+(reserva.DataFim > reservaE.DataInicio && reserva.DataFim < reservaE.DataFim)
+(reserva.DataFim > reservaE.DataFim && reserva.DataInicio < reservaE.DataInicio)
+(reserva.DataFim < reservaE.DataFim && reserva.DataInicio > reservaE.DataInicio)
